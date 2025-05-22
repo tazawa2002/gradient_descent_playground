@@ -67,10 +67,6 @@
             <button id="stopButton">Stop Optimization</button>
         </div>
 
-        <button id="generateURLButton">Generate URL</button>
-        <p id="generatedURL"></p>
-        <p id="copyStatus"></p>
-
         <button id="tweetButton">Post URL</button>
         
 
@@ -187,18 +183,6 @@
                 return `${baseUrl}?${params.toString()}`;
             }
 
-            document.getElementById('generateURLButton').addEventListener('click', async () => {
-                const url = generateURL();
-                document.getElementById('generatedURL').textContent = url;
-                try {
-                    await navigator.clipboard.writeText(url); // クリップボードにコピー
-                    document.getElementById('copyStatus').textContent = 'URL copied to clipboard!';
-                } catch (err) {
-                    document.getElementById('copyStatus').textContent = 'Failed to copy URL.';
-                    console.error('Failed to copy: ', err);
-                }
-            });
-
             // 画像の取得
             function getCanvasImage() {
                 const canvas = document.getElementById('heatmapCanvas');
@@ -220,18 +204,18 @@
             // Xの投稿ボタンのクリックイベント
             document.getElementById('tweetButton').addEventListener('click', async () => {
                 const url = generateURL(); // 現在の設定からURLを生成
-                const text = "Check out this optimization visualization!"; // 投稿するテキスト
-                const hashtags = ""; // ハッシュタグ（カンマ区切り）
+                const text = "私の最適化結果を共有します！ぜひご覧ください！"; // 投稿するテキスト
+                const hashtags = "勾配法の可視化,optimaize_visual_web"; // ハッシュタグ（カンマ区切り）
                 const twitterUrl = `https://x.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}&hashtags=${encodeURIComponent(hashtags)}`;
                 
                 // 画像を取得してクリップボードにコピー
                 const imageDataUrl = getCanvasImage();
                 try {
                     await copyCanvasToClipboard(imageDataUrl);
-                    alert('Canvas image copied to clipboard! You can paste it into your post.');
+                    alert('画像をクリップボードにコピーしました！投稿に貼り付けることができます。');
                 } catch (err) {
                     console.error('Failed to copy canvas image to clipboard:', err);
-                    alert('Failed to copy canvas image to clipboard.');
+                    alert('画像をクリップボードにコピーできませんでした。');
                 }
 
                 // 新しいタブでTwitterの投稿画面を開く
