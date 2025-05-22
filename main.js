@@ -148,3 +148,12 @@ document.getElementById('tweetButton').addEventListener('click', async () => {
     // 新しいタブでTwitterの投稿画面を開く
     window.open(twitterUrl, '_blank');
 });
+
+// 画像のダウンロードボタンのクリックイベント
+document.getElementById('downloadButton').addEventListener('click', () => {
+    const canvas = document.getElementById('heatmapCanvas'); // ヒートマップのキャンバスを取得
+    const link = document.createElement('a'); // ダウンロード用のリンクを作成
+    link.download = 'gradient_descent_result.png'; // 保存するファイル名を指定
+    link.href = canvas.toDataURL('image/png'); // `canvas` を画像データURLに変換
+    link.click(); // リンクをクリックしてダウンロードを実行
+});
