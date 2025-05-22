@@ -9,7 +9,8 @@ body {
 h1 {
     text-align: center;
     margin: 20px 0;
-    color: #444;
+    color: whitesmoke;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #config {
@@ -99,4 +100,21 @@ button:hover {
     text-align: center;
     font-size: 18px;
     margin: 10px 0;
+}
+
+header {
+    background: linear-gradient(90deg, 
+        rgb(253, 231, 37),   /* "#FDE725" */
+        rgb(34, 168, 132),   /* "#22A884" */
+        rgb(42, 120, 142),   /* "#2A788E" */
+        rgb(62, 74, 137),    /* "#3E4A89" */
+        rgb(72, 40, 120),    /* "#482878" */
+        rgb(68, 1, 84)       /* "#440154" */
+    );
+    color: white; /* テキストの色を白に設定 */
+    padding: 20px 0; /* 上下の余白 */
+    text-align: center; /* テキストを中央揃え */
+    font-size: 24px; /* フォントサイズ */
+    font-weight: bold; /* フォントを太字に */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 下に影を追加 */
 }
