@@ -131,8 +131,8 @@ async function copyCanvasToClipboard(imageDataUrl) {
 // Xの投稿ボタンのクリックイベント
 document.getElementById('tweetButton').addEventListener('click', async () => {
     const url = generateURL(); // 現在の設定からURLを生成
-    const text = "私の最適化結果を共有します！ぜひご覧ください！"; // 投稿するテキスト
-    const hashtags = "勾配法の可視化,optimaize_visual_web"; // ハッシュタグ（カンマ区切り）
+    const text = "Gradient Descent Playgroundで勾配法の結果を共有します。"; // 投稿するテキスト
+    const hashtags = "gradient_descent_playground"; // ハッシュタグ（カンマ区切り）
     const twitterUrl = `https://x.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}&hashtags=${encodeURIComponent(hashtags)}`;
     
     // 画像を取得してクリップボードにコピー
