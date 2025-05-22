@@ -36,7 +36,7 @@ function normalizeLogScale(value, min, max) {
 }
 
 // ヒートマップを描画する関数
-function drawHeatmap(canvasId, f, xRange, yRange, resolution) {
+function drawHeatmap(canvasId, f, xRange, yRange, resolution, logScale = true) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) {
         console.error(`Canvas with id "${canvasId}" not found.`);
@@ -59,8 +59,12 @@ function drawHeatmap(canvasId, f, xRange, yRange, resolution) {
             const value = f(x, y);
 
             // 値を 0〜1 に正規化
-            // const normalizedValue = Math.min(1, Math.max(0, (value - resolution[0]) / (resolution[1] - resolution[0])));
-            const normalizedValue = normalizeLogScale(value, resolution[0], resolution[1]);
+            let normalizedValue;
+            if (logScale) {
+                normalizedValue = normalizeLogScale(value, resolution[0], resolution[1]);
+            } else {
+                normalizedValue = Math.min(1, Math.max(0, (value - resolution[0]) / (resolution[1] - resolution[0])));
+            }
             
 
             // カラーパレットから色を取得

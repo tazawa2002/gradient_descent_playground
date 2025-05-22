@@ -22,7 +22,11 @@
             <label for="functionType">Function Type:</label>
             <select id="functionType">
                 <option value="rosenbrock">Rosenbrock</option>
+                <option value="gaussian1">Gaussian1</option>
+                <option value="gaussian2">Gaussian2</option>
+                <option value="saddle">Saddle Point</option>
             </select>
+            <br>
 
             <label for="optimizer">Optimizer:</label>
             <select id="optimizer">
@@ -45,11 +49,13 @@
             </div>
 
             <label for="initialX">Initial X:</label>
-            <input type="number" id="initialX" value="-1.5" step="0.1">
+            <input type="range" id="initialX" min="-2.0" max="2.0" step="0.1" value="-1.5">
+            <span id="initXValue">-1.5</span>
             <br>
 
             <label for="initialY">Initial Y:</label>
-            <input type="number" id="initialY" value="1.5" step="0.1">
+            <input type="range" id="initialY" min="-1.0" max="3.0" step="0.1" value="1.5">
+            <span id="initYValue">1.5</span>
             <br>
 
             <label for="speedRange">Speed:</label>
@@ -61,10 +67,54 @@
             <button id="stopButton">Stop Optimization</button>
         </div>
 
-        <!-- Canvas -->
-        <canvas id="heatmapCanvas" width="500" height="500"></canvas>
+        <button id="generateURLButton">Generate URL</button>
+        <p id="generatedURL"></p>
+        <p id="copyStatus"></p>
+
+        <button id="tweetButton">Post URL</button>
+        
 
         <script>
+            // URLクエリパラメータを取得
+            function getQueryParams() {
+                const params = new URLSearchParams(window.location.search);
+                const queryParams = {};
+                for (const [key, value] of params.entries()) {
+                    queryParams[key] = value;
+                }
+                return queryParams;
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const queryParams = getQueryParams();
+
+                // 各パラメータをフォームに適用
+                if (queryParams.functionType) {
+                    document.getElementById('functionType').value = queryParams.functionType;
+                }
+                if (queryParams.optimizer) {
+                    document.getElementById('optimizer').value = queryParams.optimizer;
+                }
+                if (queryParams.learningRate) {
+                    document.getElementById('learningRate').value = queryParams.learningRate;
+                }
+                if (queryParams.momentum) {
+                    document.getElementById('momentum').value = queryParams.momentum;
+                }
+                if (queryParams.initialX) {
+                    document.getElementById('initialX').value = queryParams.initialX;
+                    document.getElementById('initXValue').textContent = queryParams.initialX;
+                }
+                if (queryParams.initialY) {
+                    document.getElementById('initialY').value = queryParams.initialY;
+                    document.getElementById('initYValue').textContent = queryParams.initialY;
+                }
+                if (queryParams.speed) {
+                    document.getElementById('speedRange').value = queryParams.speed;
+                    document.getElementById('speedValue').textContent = queryParams.speed;
+                }
+            });
+
             // 最適化
             document.getElementById('startButton').addEventListener('click', () => {
                 // ユーザー入力を取得
@@ -85,6 +135,16 @@
                 stopOptimization();
             });
 
+            document.getElementById('initialX').addEventListener('input', (event) => {
+                const XValue = event.target.value;
+                document.getElementById('initXValue').textContent = XValue;
+            });
+
+            document.getElementById('initialY').addEventListener('input', (event) => {
+                const YValue = event.target.value;
+                document.getElementById('initYValue').textContent = YValue;
+            });
+
             document.getElementById('speedRange').addEventListener('input', (event) => {
                 const speedValue = event.target.value;
                 document.getElementById('speedValue').textContent = speedValue;
@@ -100,6 +160,83 @@
                 setMomentum(momentum);
             });
 
+            function generateURL() {
+                const baseUrl = window.location.origin + window.location.pathname;
+
+                // 各フォームの値を取得
+                const functionType = document.getElementById('functionType').value;
+                const optimizer = document.getElementById('optimizer').value;
+                const learningRate = document.getElementById('learningRate').value;
+                const momentum = document.getElementById('momentum').value;
+                const initialX = document.getElementById('initialX').value;
+                const initialY = document.getElementById('initialY').value;
+                const speed = document.getElementById('speedRange').value;
+
+                // クエリパラメータを作成
+                const params = new URLSearchParams({
+                    functionType,
+                    optimizer,
+                    learningRate,
+                    momentum,
+                    initialX,
+                    initialY,
+                    speed,
+                });
+
+                // 完成したURLを返す
+                return `${baseUrl}?${params.toString()}`;
+            }
+
+            document.getElementById('generateURLButton').addEventListener('click', async () => {
+                const url = generateURL();
+                document.getElementById('generatedURL').textContent = url;
+                try {
+                    await navigator.clipboard.writeText(url); // クリップボードにコピー
+                    document.getElementById('copyStatus').textContent = 'URL copied to clipboard!';
+                } catch (err) {
+                    document.getElementById('copyStatus').textContent = 'Failed to copy URL.';
+                    console.error('Failed to copy: ', err);
+                }
+            });
+
+            // 画像の取得
+            function getCanvasImage() {
+                const canvas = document.getElementById('heatmapCanvas');
+                return canvas.toDataURL('image/png'); // PNG形式のデータURLを取得
+            }
+
+            // クリップボードに画像をコピー
+            async function copyCanvasToClipboard(imageDataUrl) {
+                const response = await fetch(imageDataUrl);
+                const blob = await response.blob();
+
+                await navigator.clipboard.write([
+                    new ClipboardItem({
+                        'image/png': blob,
+                    }),
+                ]);
+            }
+
+            // Xの投稿ボタンのクリックイベント
+            document.getElementById('tweetButton').addEventListener('click', async () => {
+                const url = generateURL(); // 現在の設定からURLを生成
+                const text = "Check out this optimization visualization!"; // 投稿するテキスト
+                const hashtags = ""; // ハッシュタグ（カンマ区切り）
+                const twitterUrl = `https://x.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}&hashtags=${encodeURIComponent(hashtags)}`;
+                
+                // 画像を取得してクリップボードにコピー
+                const imageDataUrl = getCanvasImage();
+                try {
+                    await copyCanvasToClipboard(imageDataUrl);
+                    alert('Canvas image copied to clipboard! You can paste it into your post.');
+                } catch (err) {
+                    console.error('Failed to copy canvas image to clipboard:', err);
+                    alert('Failed to copy canvas image to clipboard.');
+                }
+
+                // 新しいタブでTwitterの投稿画面を開く
+                window.open(twitterUrl, '_blank');
+            });
             
         </script>
     </body>

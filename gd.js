@@ -37,6 +37,7 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
     var xRange;
     var yRange;
     var resolution;
+    var logScale = true;
 
     // 最適化する関数を指定
     var optim_func;
@@ -45,6 +46,22 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
         xRange = [-2, 2];
         yRange = [-1, 3];
         resolution = [0, 2000];
+    } else if (functionType === 'gaussian1') {
+        optim_func = (x, y) => Math.exp(x**2 + y**2);
+        xRange = [-2, 2];
+        yRange = [-2, 2];
+        resolution = [0, 1000];
+    } else if (functionType === 'gaussian2') {
+        optim_func = (x, y) => Math.exp((x/2)**2 + y**2);
+        xRange = [-2, 2];
+        yRange = [-2, 2];
+        resolution = [0, 1000];
+    } else if (functionType === 'saddle') {
+        optim_func = (x, y) => x**2 - y**2;
+        xRange = [-2, 2];
+        yRange = [-2, 2];
+        resolution = [-3, 3];
+        logScale = false;
     }
 
     // キャンバスをクリア
@@ -53,7 +70,7 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // ヒートマップを描画
-    drawHeatmap('heatmapCanvas', optim_func, xRange, yRange, resolution);
+    drawHeatmap('heatmapCanvas', optim_func, xRange, yRange, resolution, logScale);
     drawAxesWithTicks('heatmapCanvas', xRange, yRange, 0.5, 'white');
     drawGrid('heatmapCanvas', xRange, yRange, 0.5, 0.5, 'lightgray');
 
