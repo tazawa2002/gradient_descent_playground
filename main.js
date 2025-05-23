@@ -61,6 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('speedValue').textContent = queryParams.speed;
         setSpeed(queryParams.speed);
     }
+
+    // `functionType` と `optimizer` の変更イベントを手動でトリガー
+    document.getElementById('functionType').dispatchEvent(new Event('change'));
+    document.getElementById('optimizer').dispatchEvent(new Event('change'));
 });
 
 // 最適化
