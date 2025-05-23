@@ -86,6 +86,51 @@ document.getElementById('momentum').addEventListener('input', (event) => {
     setMomentum(momentum);
 });
 
+document.getElementById('functionType').addEventListener('change', (event) => {
+    const functionType = event.target.value;
+
+    const initialX = document.getElementById('initialX');
+    const initialY = document.getElementById('initialY');
+
+    let xRange, yRange, xValue, yValue;
+
+    if (functionType === 'rosenbrock') {
+        xRange = [-2.0, 2.0];
+        yRange = [-1.0, 3.0];
+        xValue = -1.5;
+        yValue = 1.5;
+    } else if (functionType === 'gaussian1' || functionType === 'gaussian2') {
+        xRange = [-2.0, 2.0];
+        yRange = [-2.0, 2.0];
+        xValue = -1.5;
+        yValue = 1.5;
+    } else if (functionType === 'saddle') {
+        xRange = [-2.0, 2.0];
+        yRange = [-2.0, 2.0];
+        xValue = -1.5;
+        yValue = 0.0;
+    } else if (functionType === 'beale') {
+        xRange = [-4.5, 4.5];
+        yRange = [-4.5, 4.5];
+        xValue = -3.0;
+        yValue = -0.5;
+    }
+
+    setInitialValues(initialX, initialY, xRange, yRange, xValue, yValue);
+});
+
+function setInitialValues(initialX, initialY, xRange, yRange, xValue, yValue) {
+    initialX.min = xRange[0];
+    initialX.max = xRange[1];
+    initialX.value = xValue;
+    document.getElementById('initXValue').textContent = xValue;
+
+    initialY.min = yRange[0];
+    initialY.max = yRange[1];
+    initialY.value = yValue;
+    document.getElementById('initYValue').textContent = yValue;
+}
+
 function generateURL() {
     const baseUrl = window.location.origin + window.location.pathname;
 
@@ -112,6 +157,21 @@ function generateURL() {
     // 完成したURLを返す
     return `${baseUrl}?${params.toString()}`;
 }
+
+// URLをクリップボードにコピー
+async function copyURLToClipboard() {
+    const url = generateURL(); // 現在の設定からURLを生成
+    try {
+        await navigator.clipboard.writeText(url);
+        alert('URLをクリップボードにコピーしました！');
+    } catch (err) {
+        console.error('Failed to copy URL to clipboard:', err);
+        alert('URLをクリップボードにコピーできませんでした。');
+    }
+}
+
+// ボタンを押された時にURLをコピー
+document.getElementById('copyUrlButton').addEventListener('click', copyURLToClipboard);
 
 // 画像の取得
 function getCanvasImage() {

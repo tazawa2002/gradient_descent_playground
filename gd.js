@@ -36,7 +36,7 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
 
     var xRange;
     var yRange;
-    var resolution;
+    var resolution; // f(x,y) の範囲を指定
     var logScale = true;
 
     // 最適化する関数を指定
@@ -62,6 +62,13 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
         yRange = [-2, 2];
         resolution = [-3, 3];
         logScale = false;
+    } else if (functionType === 'beale') {
+        optim_func = (x, y) => {
+            return Math.pow(1.5 - x + x * y, 2) + Math.pow(2.25 - x + x * Math.pow(y, 2), 2) + Math.pow(2.625 - x + x * Math.pow(y, 3), 2);
+        };
+        xRange = [-4.5, 4.5];
+        yRange = [-4.5, 4.5];
+        resolution = [0, 2000];
     }
 
     // キャンバスをクリア
