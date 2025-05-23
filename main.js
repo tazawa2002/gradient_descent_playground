@@ -326,7 +326,11 @@ async function copyCanvasToClipboard(imageDataUrl) {
 // Xの投稿ボタンのクリックイベント
 document.getElementById('tweetButton').addEventListener('click', async () => {
     const url = generateURL(); // 現在の設定からURLを生成
-    const text = "Gradient Descent Playgroundで勾配法の結果を共有します。"; // 投稿するテキスト
+    const functionType = document.getElementById('functionType').value;
+    const optimizer = document.getElementById('optimizer').value;
+
+    // 投稿するURLとテキストを生成
+    const text = `Gradient Descent Playgroundで「${functionType}」を「${optimizer}」で最適化しました！`;
     const hashtags = "gradient_descent_playground"; // ハッシュタグ（カンマ区切り）
     const twitterUrl = `https://x.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}&hashtags=${encodeURIComponent(hashtags)}`;
     
