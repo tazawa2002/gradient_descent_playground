@@ -20,9 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (queryParams.learningRate) {
         document.getElementById('learningRate').value = queryParams.learningRate;
+        setLearningRate(queryParams.learningRate);
     }
     if (queryParams.momentum) {
         document.getElementById('momentum').value = queryParams.momentum;
+        setMomentum(queryParams.momentum);
     }
     if (queryParams.initialX) {
         document.getElementById('initialX').value = queryParams.initialX;
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (queryParams.speed) {
         document.getElementById('speedRange').value = queryParams.speed;
         document.getElementById('speedValue').textContent = queryParams.speed;
+        setSpeed(queryParams.speed);
     }
 });
 
