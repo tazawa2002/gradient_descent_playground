@@ -165,8 +165,8 @@ document.getElementById('functionType').addEventListener('change', (event) => {
     } else if (functionType === 'beale') {
         xRange = [-4.5, 4.5];
         yRange = [-4.5, 4.5];
-        xValue = -3.0;
-        yValue = -0.5;
+        xValue = -0.5;
+        yValue = -2.0;
     }
 
     setInitialValues(initialX, initialY, xRange, yRange, xValue, yValue);
