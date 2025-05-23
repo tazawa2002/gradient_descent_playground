@@ -23,6 +23,31 @@ function setMomentum(newMomentum) {
     momentum = newMomentum;
 }
 
+let decayRate = 0.9; // RMSprop の減衰率
+function setDecayRate(newDecayRate) {
+    decayRate = newDecayRate;
+}
+
+let beta1 = 0.9; // Adam の beta1
+function setBeta1(newBeta1) {
+    beta1 = newBeta1;
+}
+
+let beta2 = 0.999; // Adam の beta2
+function setBeta2(newBeta2) {
+    beta2 = newBeta2;
+}
+
+let temperature = 20; // メトロポリス法の温度
+function setTemperature(newTemperature) {
+    temperature = newTemperature;
+}
+
+let decay = 0.99; // メトロポリス法の減衰率
+function setDecay(newDecay) {
+    decay = newDecay;
+}
+
 function startOptimization(functionType, optimizerType, initialX, initialY) {
     // 既存の最適化を中断
     if (abortController) {
@@ -89,8 +114,16 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
         optimizer = new MomentumOptimizer(learningRate, momentum);
     } else if (optimizerType === 'nesterov') {
         optimizer = new NesterovOptimizer(learningRate, momentum, optim_func);
+    } else if (optimizerType === 'adagrad') {
+        optimizer = new AdaGradOptimizer(learningRate, optim_func);
+    } else if (optimizerType === 'rmsprop') {
+        optimizer = new RMSpropOptimizer(learningRate, decayRate, optim_func);
+    } else if (optimizerType === 'adadelta') {
+        optimizer = new AdaDeltaOptimizer(decayRate, optim_func);
+    } else if (optimizerType === 'adam') {
+        optimizer = new AdamOptimizer(learningRate, beta1, beta2, optim_func);
     } else if (optimizerType === 'metropolis') {
-        optimizer = new MetropolisOptimizer(20, 0.9, optim_func);
+        optimizer = new MetropolisOptimizer(temperature, decay, optim_func);
     } else if (optimizerType === 'newtonraphson') {
         optimizer = new NewtonRaphsonOptimizer(optim_func);
     }

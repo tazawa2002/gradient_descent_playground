@@ -26,6 +26,28 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('momentum').value = queryParams.momentum;
         setMomentum(queryParams.momentum);
     }
+    if (queryParams.decayrate) {
+        document.getElementById('decayrate').value = queryParams.decayrate;
+        setDecayRate(queryParams.decayrate);
+    }
+    if (queryParams.beta1) {
+        document.getElementById('beta1').value = queryParams.beta1;
+        setBeta1(queryParams.beta1);
+    }
+    if (queryParams.beta2) {
+        document.getElementById('beta2').value = queryParams.beta2;
+        setBeta2(queryParams.beta2);
+    }
+    if (queryParams.temperature) {
+        document.getElementById('temperature').value = queryParams.temperature;
+        document.getElementById('tempValue').textContent = queryParams.temperature;
+        setTemperature(queryParams.temperature);
+    }
+    if (queryParams.decay) {
+        document.getElementById('decay').value = queryParams.decay;
+        document.getElementById('decayValue').textContent = queryParams.decay;
+        setDecay(queryParams.decay);
+    }
     if (queryParams.initialX) {
         document.getElementById('initialX').value = queryParams.initialX;
         document.getElementById('initXValue').textContent = queryParams.initialX;
@@ -86,6 +108,33 @@ document.getElementById('momentum').addEventListener('input', (event) => {
     setMomentum(momentum);
 });
 
+document.getElementById('decayrate').addEventListener('input', (event) => {
+    const decayRate = event.target.value;
+    setDecayRate(decayRate);
+});
+
+document.getElementById('beta1').addEventListener('input', (event) => {
+    const beta1 = event.target.value;
+    setBeta1(beta1);
+});
+
+document.getElementById('beta2').addEventListener('input', (event) => {
+    const beta2 = event.target.value;
+    setBeta2(beta2);
+});
+
+document.getElementById('temperature').addEventListener('input', (event) => {
+    const temperature = event.target.value;
+    document.getElementById('tempValue').textContent = temperature;
+    setTemperature(temperature);
+});
+
+document.getElementById('decay').addEventListener('input', (event) => {
+    const decay = event.target.value;
+    document.getElementById('decayValue').textContent = decay;
+    setDecay(decay);
+});
+
 document.getElementById('functionType').addEventListener('change', (event) => {
     const functionType = event.target.value;
 
@@ -131,6 +180,64 @@ function setInitialValues(initialX, initialY, xRange, yRange, xValue, yValue) {
     document.getElementById('initYValue').textContent = yValue;
 }
 
+// optimizerの選択に応じて表示を切り替える
+document.getElementById('optimizer').addEventListener('change', (event) => {
+    const optimizerType = event.target.value;
+
+    // 全てのハイパーパラメータを非表示にする
+    document.getElementById('learningRateContainer').style.display = 'none';
+    document.getElementById('momentumContainer').style.display = 'none';
+    document.getElementById('decayContainer').style.display = 'none';
+    document.getElementById('adamContainer').style.display = 'none';
+    document.getElementById('metropolisContainer').style.display = 'none';
+
+    // 選択されたオプティマイザに応じて表示を切り替える
+    if (optimizerType === 'normal') {
+        document.getElementById('learningRateContainer').style.display = 'block';
+        document.getElementById('learningRate').value = 0.001;
+        setLearningRate(0.001);
+    } else if (optimizerType === 'momentum' || optimizerType === 'nesterov') {
+        document.getElementById('learningRateContainer').style.display = 'block';
+        document.getElementById('momentumContainer').style.display = 'block';
+        document.getElementById('learningRate').value = 0.001;
+        document.getElementById('momentum').value = 0.9;
+        setLearningRate(0.001);
+        setMomentum(0.9);
+    } else if (optimizerType === 'adagrad') {
+        document.getElementById('learningRateContainer').style.display = 'block';
+        document.getElementById('learningRate').value = 0.1;
+        setLearningRate(0.1);
+    } else if (optimizerType === 'rmsprop') {
+        document.getElementById('learningRateContainer').style.display = 'block';
+        document.getElementById('decayContainer').style.display = 'block';
+        document.getElementById('learningRate').value = 0.01;
+        document.getElementById('decayrate').value = 0.9;
+        setLearningRate(0.01);
+        setDecayRate(0.9);
+    } else if (optimizerType === 'adadelta') {
+        document.getElementById('decayContainer').style.display = 'block';
+        document.getElementById('decayrate').value = 0.95;
+        setDecayRate(0.95);
+    } else if (optimizerType === 'adam') {
+        document.getElementById('learningRateContainer').style.display = 'block';
+        document.getElementById('adamContainer').style.display = 'block';
+        document.getElementById('learningRate').value = 0.001;
+        document.getElementById('beta1').value = 0.9;
+        document.getElementById('beta2').value = 0.999;
+        setLearningRate(0.001);
+        setBeta1(0.9);
+        setBeta2(0.999);
+    } else if (optimizerType === 'metropolis') {
+        document.getElementById('metropolisContainer').style.display = 'block';
+        document.getElementById('temperature').value = 1.0;
+        document.getElementById('tempValue').textContent = 1.0;
+        setTemperature(1.0);
+        document.getElementById('decay').value = 0.99;
+        document.getElementById('decayValue').textContent = 0.99;
+        setDecay(0.99);
+    }
+});
+
 function generateURL() {
     const baseUrl = window.location.origin + window.location.pathname;
 
@@ -139,6 +246,11 @@ function generateURL() {
     const optimizer = document.getElementById('optimizer').value;
     const learningRate = document.getElementById('learningRate').value;
     const momentum = document.getElementById('momentum').value;
+    const decayRate = document.getElementById('decayrate').value;
+    const beta1 = document.getElementById('beta1').value;
+    const beta2 = document.getElementById('beta2').value;
+    const temperature = document.getElementById('temperature').value;
+    const decay = document.getElementById('decay').value;
     const initialX = document.getElementById('initialX').value;
     const initialY = document.getElementById('initialY').value;
     const speed = document.getElementById('speedRange').value;
@@ -149,6 +261,11 @@ function generateURL() {
         optimizer,
         learningRate,
         momentum,
+        decayRate,
+        beta1,
+        beta2,
+        temperature,
+        decay,
         initialX,
         initialY,
         speed,
