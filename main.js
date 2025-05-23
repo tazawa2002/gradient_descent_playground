@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (queryParams.initialX) {
         document.getElementById('initialX').value = queryParams.initialX;
         document.getElementById('initXValue').textContent = queryParams.initialX;
+
     }
     if (queryParams.initialY) {
         document.getElementById('initialY').value = queryParams.initialY;
@@ -62,9 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
         setSpeed(queryParams.speed);
     }
 
-    // `functionType` と `optimizer` の変更イベントを手動でトリガー
+    // 変更イベントを手動でトリガー
     document.getElementById('functionType').dispatchEvent(new Event('change'));
     document.getElementById('optimizer').dispatchEvent(new Event('change'));
+    document.getElementById('initialX').dispatchEvent(new Event('input'));
+    document.getElementById('initialY').dispatchEvent(new Event('input'));
+    document.getElementById('speedRange').dispatchEvent(new Event('input'));
+    document.getElementById('learningRate').dispatchEvent(new Event('input'));
+    document.getElementById('momentum').dispatchEvent(new Event('input'));
+    document.getElementById('decayrate').dispatchEvent(new Event('input'));
+    document.getElementById('beta1').dispatchEvent(new Event('input'));
+    document.getElementById('beta2').dispatchEvent(new Event('input'));
+    document.getElementById('temperature').dispatchEvent(new Event('input'));
+    document.getElementById('decay').dispatchEvent(new Event('input'));
 });
 
 // 最適化
