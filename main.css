@@ -13,6 +13,12 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color:rgb(62, 74, 137);
+}
+
 #config {
     max-width: 600px;
     margin: 20px auto;
@@ -123,4 +129,109 @@ header {
     font-size: 24px; /* フォントサイズ */
     font-weight: bold; /* フォントを太字に */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 下に影を追加 */
+}
+
+nav {
+    background: linear-gradient(90deg, 
+        rgb(68, 1, 84),      /* "#440154" */
+        rgb(72, 40, 120),    /* "#482878" */
+        rgb(62, 74, 137),    /* "#3E4A89" */
+        rgb(42, 120, 142),   /* "#2A788E" */
+        rgb(34, 168, 132),   /* "#22A884" */
+        rgb(253, 231, 37)    /* "#FDE725" */
+    );
+    color: white;
+    border-bottom: 1px solid #e9ecef;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+    padding: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: gray;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #6c757d;
+    color: #f8f9fa;
+    font-size: 14px;
+    border-top: 1px solid #e9ecef;
+    margin-top: 20px;
+}
+
+footer a {
+    color: #96c9ff;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* Guide Styles */
+#guide, #features {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Gallery Styles */
+#gallery {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+#gallery a {
+    display: block;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#gallery a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+#gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
 }
