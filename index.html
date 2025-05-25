@@ -12,8 +12,10 @@
         gtag('config', 'G-LTLTQKC0D8');
         </script>
         <title> Gradient Descent Playground </title>
-        <meta name="description" content="SGDやAdamなどの勾配法を、視覚的に比較・理解できる教育向けWebアプリです。関数の形やパラメータを変えながら最適化の動きを学べます。">
-        <meta name="keywords" content="勾配法, gradient descent, 機械学習, 可視化, 最適化, Adam, SGD, 教育, Webアプリ">
+        <meta name="description" content="勾配法を、視覚的に比較・理解できる教育向けWebアプリです。関数の形や初期値、勾配法の種類やハイパーパラメーターを変えながら勾配法の最適解の探索過程の動きを観察できます。">
+        <meta name="keywords" content="勾配法, gradient descent, 機械学習, 可視化, 最適化, 教育, Webアプリ">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="./optimizer.js"></script>
         <script src="./visualizer.js"></script>
         <script src="./gd.js"></script>
@@ -31,97 +33,100 @@
             </ul>
         </nav>
 
-        <!-- ヒートマップ -->
-        <div id="heatmap"> </div>
+        <main>
+            <!-- ヒートマップ -->
+            <div id="heatmap"> </div>
 
-        <!-- step数 -->
-        <div id="stepCount">Step Count: 0</div>
+            <!-- step数 -->
+            <div id="stepCount">Step Count: 0</div>
 
-        <!-- ハイパーパラメーター設定フォーム -->
-        <div id="config">
-            <button id="startButton">Start Optimization</button>
-            <button id="stopButton">Stop Optimization</button>
+            <!-- ハイパーパラメーター設定フォーム -->
+            <div id="config">
+                <button id="startButton">Start Optimization</button>
+                <button id="stopButton">Stop Optimization</button>
 
-            <label for="speedRange">Speed:<span id="speedValue">50</span> step/s</label>
-            <input type="range" id="speedRange" min="10" max="1000" step="10" value="50">
-            <br>
+                <label for="speedRange">Speed:<span id="speedValue">50</span> step/s</label>
+                <input type="range" id="speedRange" min="10" max="1000" step="10" value="50">
+                <br>
 
-            <label for="functionType">Function Type:</label>
-            <select id="functionType">
-                <option value="rosenbrock">Rosenbrock</option>
-                <option value="gaussian1">Gaussian1</option>
-                <option value="gaussian2">Gaussian2</option>
-                <option value="saddle">Saddle Point</option>
-                <option value="beale">Beale</option>
-            </select>
-            <br>
+                <label for="functionType">Function Type:</label>
+                <select id="functionType">
+                    <option value="rosenbrock">Rosenbrock</option>
+                    <option value="gaussian1">Gaussian1</option>
+                    <option value="gaussian2">Gaussian2</option>
+                    <option value="saddle">Saddle Point</option>
+                    <option value="beale">Beale</option>
+                </select>
+                <br>
 
-            <label for="initialX">Initial X:<span id="initXValue">-1.5</span></label>
-            <input type="range" id="initialX" min="-2.0" max="2.0" step="0.01" value="-1.5">
-            <br>
+                <label for="initialX">Initial X:<span id="initXValue">-1.5</span></label>
+                <input type="range" id="initialX" min="-2.0" max="2.0" step="0.01" value="-1.5">
+                <br>
 
-            <label for="initialY">Initial Y:<span id="initYValue">1.5</span></label>
-            <input type="range" id="initialY" min="-1.0" max="3.0" step="0.01" value="1.5">
-            <br>
+                <label for="initialY">Initial Y:<span id="initYValue">1.5</span></label>
+                <input type="range" id="initialY" min="-1.0" max="3.0" step="0.01" value="1.5">
+                <br>
 
-            <label for="optimizer">Optimizer:</label>
-            <select id="optimizer">
-                <option value="normal">Normal</option>
-                <option value="momentum">Momentum</option>
-                <option value="nesterov">Nesterov</option>
-                <option value="adagrad">AdaGrad</option>
-                <option value="rmsprop">RMSProp</option>
-                <option value="adadelta">AdaDelta</option>
-                <option value="adam">Adam</option>
-                <option value="metropolis">Metropolis</option>
-                <option value="newtonraphson">Newton-Raphson</option>
-            </select>
-            <br>
+                <label for="optimizer">Optimizer:</label>
+                <select id="optimizer">
+                    <option value="normal">Normal</option>
+                    <option value="momentum">Momentum</option>
+                    <option value="nesterov">Nesterov</option>
+                    <option value="adagrad">AdaGrad</option>
+                    <option value="rmsprop">RMSProp</option>
+                    <option value="adadelta">AdaDelta</option>
+                    <option value="adam">Adam</option>
+                    <option value="metropolis">Metropolis</option>
+                    <option value="newtonraphson">Newton-Raphson</option>
+                </select>
+                <br>
 
-            <div id="hypperparameters">
-                <div id="learningRateContainer">
-                    <label for="learningRate">Learning Rate:</label>
-                    <input type="number" id="learningRate" value="0.001" step="0.0001">
-                    <br>
-                </div>
-            
-                <div id="momentumContainer" style="display: none;">
-                    <label for="momentum">Momentum:</label>
-                    <input type="number" id="momentum" value="0.9" step="0.1">
-                    <br>
-                </div>
+                <div id="hypperparameters">
+                    <div id="learningRateContainer">
+                        <label for="learningRate">Learning Rate:</label>
+                        <input type="number" id="learningRate" value="0.001" step="0.0001">
+                        <br>
+                    </div>
+                
+                    <div id="momentumContainer" style="display: none;">
+                        <label for="momentum">Momentum:</label>
+                        <input type="number" id="momentum" value="0.9" step="0.1">
+                        <br>
+                    </div>
 
-                <div id="decayContainer" style="display: none;">
-                    <label for="decayrate">DecayRate:</label>
-                    <input type="number" id="decayrate" value="0.99" step="0.01">
-                    <br>
-                </div>
+                    <div id="decayContainer" style="display: none;">
+                        <label for="decayrate">DecayRate:</label>
+                        <input type="number" id="decayrate" value="0.99" step="0.01">
+                        <br>
+                    </div>
 
-                <div id="adamContainer" style="display: none;">
-                    <label for="beta1">Beta1:</label>
-                    <input type="number" id="beta1" value="0.9" step="0.01">
-                    <br>
-                    <label for="beta2">Beta2:</label>
-                    <input type="number" id="beta2" value="0.999" step="0.01">
-                    <br>
-                </div>
-            
-                <div id="metropolisContainer" style="display: none;">
-                    <label for="temperature">Temperature:</label><span id="tempValue">1.0</span>
-                    <input type="range" id="temperature" max="1.0" min="0.01" value="1.0" step="0.01">
-                    <br>
-                    <label for="decay">Decay:</label><span id="decayValue">0.99</span>
-                    <input type="range" id="decay" max="1.0" min="0.0" value="0.99" step="0.01">
-                    <br>
+                    <div id="adamContainer" style="display: none;">
+                        <label for="beta1">Beta1:</label>
+                        <input type="number" id="beta1" value="0.9" step="0.01">
+                        <br>
+                        <label for="beta2">Beta2:</label>
+                        <input type="number" id="beta2" value="0.999" step="0.01">
+                        <br>
+                    </div>
+                
+                    <div id="metropolisContainer" style="display: none;">
+                        <label for="temperature">Temperature:</label><span id="tempValue">1.0</span>
+                        <input type="range" id="temperature" max="1.0" min="0.01" value="1.0" step="0.01">
+                        <br>
+                        <label for="decay">Decay:</label><span id="decayValue">0.99</span>
+                        <input type="range" id="decay" max="1.0" min="0.0" value="0.99" step="0.01">
+                        <br>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="buttonContainer">
-            <button id="tweetButton">Xで結果をシェア</button>
-            <button id="downloadButton">結果を画像として保存</button>
-            <button id="copyUrlButton">URLをコピー</button>
-        </div>
+            <div id="buttonContainer">
+                <button id="tweetButton">Xで結果をシェア</button>
+                <button id="downloadButton">結果を画像として保存</button>
+                <button id="copyUrlButton">URLをコピー</button>
+            </div>
+
+        </main>
 
         <script src="./main.js"></script>
 

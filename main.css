@@ -235,3 +235,73 @@ footer a:hover {
     object-fit: cover;
     border-radius: 8px;
 }
+
+
+/* レスポンシブ対応: 768px以下の画面幅 (タブレット) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    #config, #guide, #features {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    nav ul li a {
+        font-size: 18px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    #buttonContainer {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #buttonContainer button {
+        width: 100%;
+    }
+
+    #heatmapCanvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* レスポンシブ対応: 480px以下の画面幅 (スマートフォン) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+    }
+
+    #config, #guide, #features {
+        padding: 10px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    #heatmapCanvas {
+        width: 100%;
+        height: auto;
+    }
+}
