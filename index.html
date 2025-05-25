@@ -122,8 +122,16 @@
 
             <div id="buttonContainer">
                 <button id="tweetButton">Xで結果をシェア</button>
-                <button id="downloadButton">結果を画像として保存</button>
+                <button id="modalButton">結果を画像として保存</button>
                 <button id="copyUrlButton">URLをコピー</button>
+            </div>
+
+            <div id="customModal" class="modal">
+                <div class="modal-content">
+                    <span id="closeModal" class="close">&times;</span>
+                    <img id="modalImage" src="" alt="コピーする画像" style="max-width: 100%; border: 1px solid #ccc;">
+                    <button id="downloadButton">ダウンロード</button>
+                </div>
             </div>
 
         </main>

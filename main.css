@@ -94,7 +94,6 @@ button:hover {
 
 #buttonContainer button {
     width: 30%;
-    padding: 10px 20px;
     font-size: 14px;
     border: none;
     border-radius: 4px;
@@ -240,6 +239,44 @@ footer a:hover {
     border-radius: 8px;
 }
 
+/* モーダルのスタイル */
+.modal {
+    display: none; /* 初期状態では非表示 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
 
 /* レスポンシブ対応: 768px以下の画面幅 (タブレット) */
 @media (max-width: 768px) {
@@ -263,7 +300,7 @@ footer a:hover {
 
     #buttonContainer {
         flex-direction: column;
-        gap: 10px;
+        gap: 0px;
     }
 
     #buttonContainer button {

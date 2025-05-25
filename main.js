@@ -313,6 +313,61 @@ async function copyCanvasToClipboard(imageDataUrl) {
     ]);
 }
 
+function showCustomModal(imageDataUrl) {
+    const modal = document.getElementById('customModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+
+    // モーダルに画像を設定
+    modalImage.src = imageDataUrl;
+
+    // モーダルを表示
+    modal.style.display = 'block';
+
+    // 閉じるボタンのイベントリスナー
+    closeModal.onclick = () => {
+        modal.style.display = 'none';
+    };
+
+    // モーダル外をクリックした場合に閉じる
+    window.onclick = (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    };
+}
+
+// モーダルボタンのクリックイベント
+document.getElementById('modalButton').addEventListener('click', () => {
+    showImageForManualCopy(getCanvasImage());
+});
+
+// Safariではクリップボードに画像をコピーできないため、手動でコピーするように指示
+function showImageForManualCopy(imageDataUrl) {
+    showCustomModal(imageDataUrl); // モーダルを表示して画像を見せる
+}
+
+function waitForModalClose(modalId) {
+    return new Promise((resolve) => {
+        const modal = document.getElementById(modalId);
+        const closeModal = document.getElementById('closeModal');
+
+        // 閉じるボタンのイベントリスナー
+        closeModal.onclick = () => {
+            modal.style.display = 'none';
+            resolve(); // モーダルが閉じられたら Promise を解決
+        };
+
+        // モーダル外をクリックした場合に閉じる
+        window.onclick = (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                resolve(); // モーダルが閉じられたら Promise を解決
+            }
+        };
+    });
+}
+
 // Xの投稿ボタンのクリックイベント
 document.getElementById('tweetButton').addEventListener('click', async () => {
     const url = generateURL(); // 現在の設定からURLを生成
@@ -331,7 +386,7 @@ document.getElementById('tweetButton').addEventListener('click', async () => {
         alert('画像をクリップボードにコピーしました！投稿に貼り付けることができます。');
     } catch (err) {
         console.error('Failed to copy canvas image to clipboard:', err);
-        alert('画像をクリップボードにコピーできませんでした。');
+        alert('画像をクリップボードにコピーできませんでした。手動でコピーしてください。');
     }
 
     // 新しいタブでTwitterの投稿画面を開く
