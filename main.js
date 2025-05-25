@@ -19,47 +19,47 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('optimizer').value = queryParams.optimizer;
     }
     if (queryParams.learningRate) {
-        document.getElementById('learningRate').value = queryParams.learningRate;
+        document.getElementById('learningRate').value = parseFloat(queryParams.learningRate);
         setLearningRate(queryParams.learningRate);
     }
     if (queryParams.momentum) {
-        document.getElementById('momentum').value = queryParams.momentum;
+        document.getElementById('momentum').value = parseFloat(queryParams.momentum);
         setMomentum(queryParams.momentum);
     }
     if (queryParams.decayrate) {
-        document.getElementById('decayrate').value = queryParams.decayrate;
+        document.getElementById('decayrate').value = parseFloat(queryParams.decayrate);
         setDecayRate(queryParams.decayrate);
     }
     if (queryParams.beta1) {
-        document.getElementById('beta1').value = queryParams.beta1;
+        document.getElementById('beta1').value = qparseFloat(ueryParams.beta1);
         setBeta1(queryParams.beta1);
     }
     if (queryParams.beta2) {
-        document.getElementById('beta2').value = queryParams.beta2;
+        document.getElementById('beta2').value = parseFloat(queryParams.beta2);
         setBeta2(queryParams.beta2);
     }
     if (queryParams.temperature) {
-        document.getElementById('temperature').value = queryParams.temperature;
-        document.getElementById('tempValue').textContent = queryParams.temperature;
+        document.getElementById('temperature').value = parseFloat(queryParams.temperature);
+        document.getElementById('tempValue').textContent = parseFloat(queryParams.temperature);
         setTemperature(queryParams.temperature);
     }
     if (queryParams.decay) {
-        document.getElementById('decay').value = queryParams.decay;
-        document.getElementById('decayValue').textContent = queryParams.decay;
+        document.getElementById('decay').value = parseFloat(queryParams.decay);
+        document.getElementById('decayValue').textContent = parseFloat(queryParams.decay);
         setDecay(queryParams.decay);
     }
     if (queryParams.initialX) {
-        document.getElementById('initialX').value = queryParams.initialX;
-        document.getElementById('initXValue').textContent = queryParams.initialX;
+        document.getElementById('initialX').value = parseFloat(queryParams.initialX);
+        document.getElementById('initXValue').textContent = parseFloat(queryParams.initialX);
 
     }
     if (queryParams.initialY) {
-        document.getElementById('initialY').value = queryParams.initialY;
-        document.getElementById('initYValue').textContent = queryParams.initialY;
+        document.getElementById('initialY').value = parseFloat(queryParams.initialY);
+        document.getElementById('initYValue').textContent = parseFloat(queryParams.initialY);
     }
     if (queryParams.speed) {
-        document.getElementById('speedRange').value = queryParams.speed;
-        document.getElementById('speedValue').textContent = queryParams.speed;
+        document.getElementById('speedRange').value = parseFloat(queryParams.speed);
+        document.getElementById('speedValue').textContent = parseFloat(queryParams.speed);
         setSpeed(queryParams.speed);
     }
 
