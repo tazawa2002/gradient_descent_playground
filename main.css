@@ -171,6 +171,10 @@ nav ul li a:hover {
     color: gray;
 }
 
+main {
+    padding: 10px;
+}
+
 footer {
     text-align: center;
     padding: 10px 0;
@@ -239,10 +243,6 @@ footer a:hover {
 
 /* レスポンシブ対応: 768px以下の画面幅 (タブレット) */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
     #config, #guide, #features {
         max-width: 100%;
         padding: 15px;
@@ -283,7 +283,6 @@ footer a:hover {
     }
 
     nav ul {
-        flex-direction: row;
         gap: 10px;
     }
 
