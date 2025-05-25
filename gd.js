@@ -128,10 +128,15 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
         optimizer = new NewtonRaphsonOptimizer(optim_func);
     }
 
-    // 初期値
+
+    // 初期値の設定
     let x = initialX;
     let y = initialY;
-    drawPoint('heatmapCanvas', x, y, xRange, yRange, 'white', 3);
+
+    let canvas_id = 'heatmapCanvas'; // canvasのid
+    let point_color = 'white'; // 点の色
+    let point_size = 3; // 点のサイズ
+    drawPoint(canvas_id, x, y, xRange, yRange, point_color, point_size);
 
     // 最適化ループ
     (async () => {
@@ -146,7 +151,7 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
                 const result = optimizer.update(x, y, gradX, gradY);
                 x = result.x;
                 y = result.y;
-                drawPoint('heatmapCanvas', x, y, xRange, yRange, 'white', 3);
+                drawPoint(canvas_id, x, y, xRange, yRange, point_color, point_size);
 
                 step_txt = document.createElement('p');
                 step_txt.textContent = `Step: ${step}`;
