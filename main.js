@@ -14,68 +14,58 @@ document.addEventListener('DOMContentLoaded', () => {
     // 各パラメータをフォームに適用
     if (queryParams.functionType) {
         document.getElementById('functionType').value = queryParams.functionType;
+        document.getElementById('functionType').dispatchEvent(new Event('change'));
     }
     if (queryParams.optimizer) {
         document.getElementById('optimizer').value = queryParams.optimizer;
+        document.getElementById('optimizer').dispatchEvent(new Event('change'));
     }
     if (queryParams.learningRate) {
         document.getElementById('learningRate').value = parseFloat(queryParams.learningRate);
-        setLearningRate(queryParams.learningRate);
+        document.getElementById('learningRate').dispatchEvent(new Event('input'));
     }
     if (queryParams.momentum) {
         document.getElementById('momentum').value = parseFloat(queryParams.momentum);
-        setMomentum(queryParams.momentum);
+        document.getElementById('momentum').dispatchEvent(new Event('input'));
     }
     if (queryParams.decayrate) {
         document.getElementById('decayrate').value = parseFloat(queryParams.decayrate);
-        setDecayRate(queryParams.decayrate);
+        document.getElementById('decayrate').dispatchEvent(new Event('input'));
     }
     if (queryParams.beta1) {
         document.getElementById('beta1').value = qparseFloat(ueryParams.beta1);
-        setBeta1(queryParams.beta1);
+        document.getElementById('beta1').dispatchEvent(new Event('input'));
     }
     if (queryParams.beta2) {
         document.getElementById('beta2').value = parseFloat(queryParams.beta2);
-        setBeta2(queryParams.beta2);
+        document.getElementById('beta2').dispatchEvent(new Event('input'));
     }
     if (queryParams.temperature) {
         document.getElementById('temperature').value = parseFloat(queryParams.temperature);
         document.getElementById('tempValue').textContent = parseFloat(queryParams.temperature);
-        setTemperature(queryParams.temperature);
+        document.getElementById('temperature').dispatchEvent(new Event('input'));
     }
     if (queryParams.decay) {
         document.getElementById('decay').value = parseFloat(queryParams.decay);
         document.getElementById('decayValue').textContent = parseFloat(queryParams.decay);
-        setDecay(queryParams.decay);
+        document.getElementById('decay').dispatchEvent(new Event('input'));
     }
     if (queryParams.initialX) {
         document.getElementById('initialX').value = parseFloat(queryParams.initialX);
         document.getElementById('initXValue').textContent = parseFloat(queryParams.initialX);
+        document.getElementById('initialX').dispatchEvent(new Event('input'));
 
     }
     if (queryParams.initialY) {
         document.getElementById('initialY').value = parseFloat(queryParams.initialY);
         document.getElementById('initYValue').textContent = parseFloat(queryParams.initialY);
+        document.getElementById('initialY').dispatchEvent(new Event('input'));
     }
     if (queryParams.speed) {
         document.getElementById('speedRange').value = parseFloat(queryParams.speed);
         document.getElementById('speedValue').textContent = parseFloat(queryParams.speed);
-        setSpeed(queryParams.speed);
+        document.getElementById('speedRange').dispatchEvent(new Event('input'));
     }
-
-    // 変更イベントを手動でトリガー
-    document.getElementById('functionType').dispatchEvent(new Event('change'));
-    document.getElementById('optimizer').dispatchEvent(new Event('change'));
-    document.getElementById('initialX').dispatchEvent(new Event('input'));
-    document.getElementById('initialY').dispatchEvent(new Event('input'));
-    document.getElementById('speedRange').dispatchEvent(new Event('input'));
-    document.getElementById('learningRate').dispatchEvent(new Event('input'));
-    document.getElementById('momentum').dispatchEvent(new Event('input'));
-    document.getElementById('decayrate').dispatchEvent(new Event('input'));
-    document.getElementById('beta1').dispatchEvent(new Event('input'));
-    document.getElementById('beta2').dispatchEvent(new Event('input'));
-    document.getElementById('temperature').dispatchEvent(new Event('input'));
-    document.getElementById('decay').dispatchEvent(new Event('input'));
 });
 
 // 最適化
