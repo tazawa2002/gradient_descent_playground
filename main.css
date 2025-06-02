@@ -306,7 +306,8 @@ footer a:hover {
     }
 
     #buttonContainer button {
-        width: 100%;
+        width: 95%;
+        margin: 10px auto; /* 上下の余白を追加 */
     }
 
     #heatmapCanvas {
