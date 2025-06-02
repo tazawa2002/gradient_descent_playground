@@ -138,10 +138,15 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
     let point_size = 3; // 点のサイズ
     drawPoint(canvas_id, x, y, xRange, yRange, point_color, point_size);
 
+    // step x y の要素
+    var step_container = document.getElementById('stepCount');
+    var x_container = document.getElementById('x');
+    var y_container = document.getElementById('y');
+
     // 最適化ループ
     (async () => {
         try {
-            for (let step = 0; step < 10000; step++) {
+            for (let step = 1; step < 10000; step++) {
                 // 中断が要求された場合は例外をスロー
                 if (signal.aborted) {
                     throw new Error('Optimization aborted');
@@ -155,8 +160,18 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
 
                 step_txt = document.createElement('p');
                 step_txt.textContent = `Step: ${step}`;
-                document.getElementById('stepCount').innerHTML = ''; // 既存のテキストをクリア
-                document.getElementById('stepCount').appendChild(step_txt);
+                step_container.innerHTML = ''; // 既存のテキストをクリア
+                step_container.appendChild(step_txt);
+
+                x_txt = document.createElement('p');
+                x_txt.textContent = `x: ${x.toFixed(6)}`;
+                x_container.innerHTML = ''; // 既存のテキストをクリア
+                x_container.appendChild(x_txt);
+
+                y_txt = document.createElement('p');
+                y_txt.textContent = `y: ${y.toFixed(6)}`;
+                y_container.innerHTML = ''; // 既存のテキストをクリア
+                y_container.appendChild(y_txt);
 
                 // 収束判定
                 if (Math.abs(gradX) < 1e-6 && Math.abs(gradY) < 1e-6) {

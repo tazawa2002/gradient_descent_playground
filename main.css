@@ -53,7 +53,6 @@ input[type="range"] {
 
 span {
     display: inline-block;
-    width: 40px;
     text-align: center;
     font-weight: bold;
 }
@@ -107,10 +106,13 @@ button:hover {
     background-color: #0056b3;
 }
 
-#stepCount {
-    text-align: center;
-    font-size: 18px;
-    margin: 10px 0;
+#stepInfo {
+    display: flex; /* フレックスボックスを使用 */
+    justify-content: center; /* 水平方向に中央揃え */
+    align-items: center; /* 垂直方向に中央揃え */
+    gap: 10px; /* 子要素間の間隔を設定 */
+    text-align: center; /* テキストを中央揃え */
+    margin: 0 auto; /* 親要素内で中央揃え */
 }
 
 header {
