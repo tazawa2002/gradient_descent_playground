@@ -116,7 +116,7 @@ button:hover {
 }
 
 header {
-    background: linear-gradient(90deg, 
+    background: radial-gradient(circle at center,
         rgb(253, 231, 37),   /* "#FDE725" */
         rgb(34, 168, 132),   /* "#22A884" */
         rgb(42, 120, 142),   /* "#2A788E" */
@@ -133,7 +133,7 @@ header {
 }
 
 nav {
-    background: linear-gradient(90deg, 
+    background: radial-gradient(circle at center, 
         rgb(68, 1, 84),      /* "#440154" */
         rgb(72, 40, 120),    /* "#482878" */
         rgb(62, 74, 137),    /* "#3E4A89" */
