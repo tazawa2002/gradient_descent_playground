@@ -374,8 +374,16 @@ document.getElementById('tweetButton').addEventListener('click', async () => {
     const functionType = document.getElementById('functionType').value;
     const optimizer = document.getElementById('optimizer').value;
 
+    // 最適化の結果を取得
+    var step_container = document.getElementById('stepCount');
+    var x_container = document.getElementById('x');
+    var y_container = document.getElementById('y');
+    var step = step_container.textContent;
+    var x = x_container.textContent;
+    var y = y_container.textContent;
+
     // 投稿するURLとテキストを生成
-    const text = `Gradient Descent Playgroundで「${functionType}」を「${optimizer}」で最適化しました！`;
+    const text = `Gradient Descent Playgroundで「${functionType}」を「${optimizer}」で最適化しました！\n結果は、${step}、${x}、${y}です。`;
     const hashtags = "gradient_descent_playground"; // ハッシュタグ（カンマ区切り）
     const twitterUrl = `https://x.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}&hashtags=${encodeURIComponent(hashtags)}`;
     
