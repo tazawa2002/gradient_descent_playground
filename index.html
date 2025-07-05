@@ -146,6 +146,12 @@
                 <button id="modalButton">結果を画像として表示</button>
                 <button id="copyUrlButton">URLをコピー</button>
             </div>
+            <div id="buttonContainer">
+                <button id="signInGoogleButton">Googleでサインイン</button>
+                <button id="signOutButton" style="display:none;">サインアウト</button>
+                <span id="userStatus">未サインイン</span>
+                <button id="saveResultButton">結果を保存</button>
+            </div>
 
             <div id="customModal" class="modal">
                 <div class="modal-content">
@@ -166,5 +172,12 @@
                 <a href="https://github.com/tazawa2002" target="_blank">GitHub</a>
             </p>
         </footer>
+
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+        
+        <script src="./firebase.js"></script>
     </body>
 </html>

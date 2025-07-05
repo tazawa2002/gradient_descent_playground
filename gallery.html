@@ -46,7 +46,7 @@
         <h2>Gallery</h2>
         <main>
             <section id="gallery">
-                <a href="index.html?functionType=rosenbrock&optimizer=normal&learningRate=0.001&momentum=0.9&decayRate=0.99&beta1=0.9&beta2=0.999&temperature=1&decay=0.99&initialX=-1.5&initialY=1.5&speed=1000">
+                <!-- <a href="index.html?functionType=rosenbrock&optimizer=normal&learningRate=0.001&momentum=0.9&decayRate=0.99&beta1=0.9&beta2=0.999&temperature=1&decay=0.99&initialX=-1.5&initialY=1.5&speed=1000">
                     <img src="./images/normal.png" alt="normalのサンプル画像">
                 </a>
                 <a href="index.html?functionType=rosenbrock&optimizer=momentum&learningRate=0.001&momentum=0.9&decayRate=0.99&beta1=0.9&beta2=0.999&temperature=1&decay=0.99&initialX=-1.5&initialY=1.5&speed=50">
@@ -72,8 +72,20 @@
                 </a>
                 <a href="index.html?functionType=gaussian2&optimizer=nesterov&learningRate=0.001&momentum=0.9&decayRate=0.99&beta1=0.9&beta2=0.999&temperature=1&decay=0.99&initialX=-1.5&initialY=1.5&speed=50">
                     <img src="./images/gaussian2-nesterov.png" alt="gaussian2-Nesterovのサンプル画像">
-                </a>
+                </a> -->
             </section>
+
+            <section id="userGallerySection">
+                <h2>Your Results</h2>
+                <div id="userGalleryResults">
+                    </div>
+            </section>
+
+            <div id="buttonContainer">
+                <button id="signInGoogleButton">Googleでサインイン</button>
+                <button id="signOutButton" style="display:none;">サインアウト</button>
+                <span id="userStatus">未サインイン</span>
+            </div>
         </main>
         <footer>
             <p>© 2025 Gradient Descent Playground. Created by tazawa2002.</p>
@@ -81,5 +93,12 @@
                 <a href="https://github.com/tazawa2002" target="_blank">GitHub</a>
             </p>
         </footer>
+
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
+        
+        <script src="./firebase.js"></script>
     </body>
 </html>
