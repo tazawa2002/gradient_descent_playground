@@ -1,0 +1,387 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: whitesmoke;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color:rgb(62, 74, 137);
+}
+
+#config {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="number"],
+select,
+input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="range"] {
+    width: calc(100% - 50px);
+    display: inline-block;
+}
+
+span {
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+}
+
+button {
+    display: inline-block;
+    width: calc(49% - 10px);
+    padding: 10px;
+    margin: 10px 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#heatmap {
+    display: block;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+}
+
+#buttonContainer {
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center; /* ボタンを中央揃え */
+    gap: 10px; /* ボタン間のスペース */
+    margin-top: 20px; /* 上部に余白を追加 */
+}
+
+#buttonContainer button {
+    width: 30%;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+#buttonContainer button:hover {
+    background-color: #0056b3;
+}
+
+#stepInfo {
+    display: flex; /* フレックスボックスを使用 */
+    justify-content: center; /* 水平方向に中央揃え */
+    align-items: center; /* 垂直方向に中央揃え */
+    gap: 10px; /* 子要素間の間隔を設定 */
+    text-align: center; /* テキストを中央揃え */
+    margin: 0 auto; /* 親要素内で中央揃え */
+}
+
+header {
+    background: radial-gradient(circle at center,
+        rgb(253, 231, 37),   /* "#FDE725" */
+        rgb(34, 168, 132),   /* "#22A884" */
+        rgb(42, 120, 142),   /* "#2A788E" */
+        rgb(62, 74, 137),    /* "#3E4A89" */
+        rgb(72, 40, 120),    /* "#482878" */
+        rgb(68, 1, 84)       /* "#440154" */
+    );
+    color: white; /* テキストの色を白に設定 */
+    padding: 20px 0; /* 上下の余白 */
+    text-align: center; /* テキストを中央揃え */
+    font-size: 24px; /* フォントサイズ */
+    font-weight: bold; /* フォントを太字に */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 下に影を追加 */
+}
+
+nav {
+    background: radial-gradient(circle at center, 
+        rgb(68, 1, 84),      /* "#440154" */
+        rgb(72, 40, 120),    /* "#482878" */
+        rgb(62, 74, 137),    /* "#3E4A89" */
+        rgb(42, 120, 142),   /* "#2A788E" */
+        rgb(34, 168, 132),   /* "#22A884" */
+        rgb(253, 231, 37)    /* "#FDE725" */
+    );
+    color: white;
+    border-bottom: 1px solid #e9ecef;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+    padding: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: gray;
+}
+
+main {
+    padding: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #6c757d;
+    color: #f8f9fa;
+    font-size: 14px;
+    border-top: 1px solid #e9ecef;
+    margin-top: 20px;
+}
+
+footer a {
+    color: #96c9ff;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* Guide Styles */
+#guide, #features {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Gallery Styles */
+#gallery {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+#gallery a {
+    display: block;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#gallery a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+#gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* モーダルのスタイル */
+.modal {
+    display: none; /* 初期状態では非表示 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+
+/* レスポンシブ対応: 768px以下の画面幅 (タブレット) */
+@media (max-width: 768px) {
+    #config, #guide, #features {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    nav ul li a {
+        font-size: 18px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    #buttonContainer {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    #buttonContainer button {
+        width: 95%;
+        margin: 10px auto; /* 上下の余白を追加 */
+    }
+
+    #heatmapCanvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.title {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    padding: 0.5rem;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.heatmapContainer {
+    position: relative; /* 子要素を絶対配置するための基準点 */
+    width: fit-content;
+    height: fit-content;
+}
+
+.pathCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none; /* 下のCanvasのイベントを妨げないようにする */
+}
+
+/* レスポンシブ対応: 480px以下の画面幅 (スマートフォン) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    nav ul {
+        gap: 10px;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+    }
+
+    #config, #guide, #features {
+        padding: 10px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    #heatmapCanvas {
+        width: 100%;
+        height: auto;
+    }
+}
