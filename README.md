@@ -13,6 +13,23 @@
 
 ---
 
+## Next.js への移行について
+現在、Next.js への移行を開始しました。`output: 'export'` により GitHub Pages 向けの静的エクスポート運用を前提に構成しています。
+
+### ローカル開発
+```bash
+npm install
+npm run dev
+```
+
+### 静的エクスポート（GitHub Pages 用）
+```bash
+npm run build
+npm run export
+```
+
+---
+
 ## 主な機能
 1. **ヒートマップの描画**  
    - 最適化対象の関数をヒートマップとして可視化。
