@@ -10,49 +10,72 @@ let abortController = null; // AbortController を保持する変数
 let speed = 50; // デフォルトのスピード
 // スピードを設定する関数
 function setSpeed(newSpeed) {
-    speed = newSpeed;
+    const parsed = Number(newSpeed);
+    if (Number.isFinite(parsed) && parsed > 0) {
+        speed = parsed;
+    }
 }
 
 let learningRate = 0.001; // 学習率
 function setLearningRate(newLearningRate) {
-    learningRate = newLearningRate;
+    const parsed = Number(newLearningRate);
+    if (Number.isFinite(parsed) && parsed > 0) {
+        learningRate = parsed;
+    }
 }
 
 let momentum = 0.9; // モーメンタム
 function setMomentum(newMomentum) {
-    momentum = newMomentum;
+    const parsed = Number(newMomentum);
+    if (Number.isFinite(parsed)) {
+        momentum = parsed;
+    }
 }
 
 let decayRate = 0.9; // RMSprop の減衰率
 function setDecayRate(newDecayRate) {
-    decayRate = newDecayRate;
+    const parsed = Number(newDecayRate);
+    if (Number.isFinite(parsed)) {
+        decayRate = parsed;
+    }
 }
 
 let beta1 = 0.9; // Adam の beta1
 function setBeta1(newBeta1) {
-    beta1 = newBeta1;
+    const parsed = Number(newBeta1);
+    if (Number.isFinite(parsed)) {
+        beta1 = parsed;
+    }
 }
 
 let beta2 = 0.999; // Adam の beta2
 function setBeta2(newBeta2) {
-    beta2 = newBeta2;
+    const parsed = Number(newBeta2);
+    if (Number.isFinite(parsed)) {
+        beta2 = parsed;
+    }
 }
 
-let temperature = 20; // メトロポリス法の温度
+let temperature = 1.0; // メトロポリス法の温度
 function setTemperature(newTemperature) {
-    temperature = newTemperature;
+    const parsed = Number(newTemperature);
+    if (Number.isFinite(parsed) && parsed > 0) {
+        temperature = parsed;
+    }
 }
 
 let decay = 0.99; // メトロポリス法の減衰率
 function setDecay(newDecay) {
-    decay = newDecay;
+    const parsed = Number(newDecay);
+    if (Number.isFinite(parsed)) {
+        decay = parsed;
+    }
 }
 
 function startOptimization(functionType, optimizerType, initialX, initialY) {
     // 既存の最適化を中断
     if (abortController) {
         abortController.abort(); // 前回の最適化を中断
-        sleep(speed*1.5); // 中断後の待機時間
     }
 
     // 新しい AbortController を作成
@@ -158,17 +181,17 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
                 y = result.y;
                 drawPoint(canvas_id, x, y, xRange, yRange, point_color, point_size);
 
-                step_txt = document.createElement('p');
+                const step_txt = document.createElement('p');
                 step_txt.textContent = `Step: ${step}`;
                 step_container.innerHTML = ''; // 既存のテキストをクリア
                 step_container.appendChild(step_txt);
 
-                x_txt = document.createElement('p');
+                const x_txt = document.createElement('p');
                 x_txt.textContent = `x: ${x.toFixed(6)}`;
                 x_container.innerHTML = ''; // 既存のテキストをクリア
                 x_container.appendChild(x_txt);
 
-                y_txt = document.createElement('p');
+                const y_txt = document.createElement('p');
                 y_txt.textContent = `y: ${y.toFixed(6)}`;
                 y_container.innerHTML = ''; // 既存のテキストをクリア
                 y_container.appendChild(y_txt);
@@ -182,7 +205,7 @@ function startOptimization(functionType, optimizerType, initialX, initialY) {
                     break;
                 }
 
-                let waitTime = 1000 / speed;;
+                const waitTime = 1000 / speed;
                 await sleep(waitTime); // ユーザー指定のスピードで待機
             }
         } catch (error) {

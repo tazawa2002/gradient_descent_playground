@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('decayrate').dispatchEvent(new Event('input'));
     }
     if (queryParams.beta1) {
-        document.getElementById('beta1').value = qparseFloat(ueryParams.beta1);
+        document.getElementById('beta1').value = parseFloat(queryParams.beta1);
         document.getElementById('beta1').dispatchEvent(new Event('input'));
     }
     if (queryParams.beta2) {
@@ -49,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('decay').value = parseFloat(queryParams.decay);
         document.getElementById('decayValue').textContent = parseFloat(queryParams.decay);
         document.getElementById('decay').dispatchEvent(new Event('input'));
+    }
+    if (queryParams.decayRate) {
+        document.getElementById('decayrate').value = parseFloat(queryParams.decayRate);
+        document.getElementById('decayrate').dispatchEvent(new Event('input'));
     }
     if (queryParams.initialX) {
         document.getElementById('initialX').value = parseFloat(queryParams.initialX);
@@ -73,14 +77,11 @@ document.getElementById('startButton').addEventListener('click', () => {
     // ユーザー入力を取得
     const functionType = document.getElementById('functionType').value;
     const optimizerType = document.getElementById('optimizer').value;
-    const learningRate = parseFloat(document.getElementById('learningRate').value);
-    const momentum = parseFloat(document.getElementById('momentum').value);
     const initialX = parseFloat(document.getElementById('initialX').value);
     const initialY = parseFloat(document.getElementById('initialY').value);
-    const speed = parseInt(document.getElementById('speedRange').value, 10);
 
     // gd.js の関数を呼び出して最適化を開始
-    startOptimization(functionType, optimizerType, initialX, initialY, speed);
+    startOptimization(functionType, optimizerType, initialX, initialY);
 });
 
 document.getElementById('stopButton').addEventListener('click', () => {
@@ -266,7 +267,7 @@ function generateURL() {
         optimizer,
         learningRate,
         momentum,
-        decayRate,
+        decayrate: decayRate,
         beta1,
         beta2,
         temperature,
